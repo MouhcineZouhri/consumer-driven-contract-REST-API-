@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 public class CustomerServiceProxy {
     private final RestTemplate restTemplate;
 
-    public String getCustomer(){
-        return restTemplate.getForObject("http://localhost:8080/customers/1" , String.class);
+    public Customer getCustomer(){
+        return restTemplate.getForObject("http://localhost:8080/customers/1" , Customer.class);
     }
 
-    public List<String> getAllCustomer(){
-        ResponseEntity<String[]> exchange = restTemplate.getForEntity("http://localhost:8080/customers",
-                String[].class);
-        String[] body = exchange.getBody();
+    public List<Customer> getAllCustomer(){
+        ResponseEntity<Customer[]> exchange = restTemplate.getForEntity("http://localhost:8080/customers",
+                Customer[].class);
+        Customer[] body = exchange.getBody();
         return Arrays.stream(body).collect(Collectors.toList());
     }
 

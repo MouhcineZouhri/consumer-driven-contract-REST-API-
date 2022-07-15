@@ -1,7 +1,9 @@
 package com.example.clientservice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,20 +27,25 @@ public class CustomerServiceProxyTest {
     @Autowired
     private CustomerServiceProxy customerServiceProxy;
 
-
     @Test
-    public void getOneCustomer(){
-        String customer = customerServiceProxy.getCustomer();
-        Assertions.assertThat(customer).isEqualTo("mohsin");
+    public void getOneCustomer()
+    {
+        Customer mohsin = new Customer(10, "mohsin");
+        Customer customer = customerServiceProxy.getCustomer();
+        Assertions.assertThat(customer).isEqualTo(mohsin);
+        Assertions.assertThat(customer.getAge()).isEqualTo(10);
+        Assertions.assertThat(customer.getName()).isEqualTo("mohsin");
     }
 
     @Test
     public void getAllCustomer(){
-        List<String> allCustomer = customerServiceProxy.getAllCustomer();
-        Assertions.assertThat(allCustomer).first().isEqualTo("mohsin");
-        Assertions.assertThat(allCustomer).contains("omar");
+        Customer mohsin = new Customer(10, "mohsin");
+        Customer omar = new Customer(20, "omar");
+        List<Customer> allCustomer = customerServiceProxy.getAllCustomer();
+        Assertions.assertThat(allCustomer.size()).isEqualTo(2);
+        Assertions.assertThat(allCustomer).contains(mohsin);
+        Assertions.assertThat(allCustomer).contains(omar);
     }
-
 }
 
 @TestConfiguration

@@ -12,14 +12,19 @@ public class CustomerController {
 
     @GetMapping("/customers")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<String> customers(){
-        return List.of("mohsin" , "omar");
+    public List<Customer> customers(){
+        return List.of(
+                new Customer(   10, "mohsin"),
+                new Customer(   20, "omar")
+        );
     }
 
 
     @GetMapping("/customers/{id}")
-    public String one(){
-        return "mohsin";
+    public Customer one()
+    {
+        return new Customer(10, "mohsin");
     }
 
 }
+

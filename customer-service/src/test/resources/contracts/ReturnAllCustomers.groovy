@@ -12,7 +12,10 @@ Contract.make {
     }
 
     response {
-        body(["mohsin" , "omar"])
+        body([
+                [age:10, name : "mohsin"],
+                [age:20, name : "omar"]
+        ])
         status(200)
         headers {
             header("Content-Type" , "application/json")
